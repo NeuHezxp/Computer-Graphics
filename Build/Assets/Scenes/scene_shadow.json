@@ -1,0 +1,115 @@
+{
+	"actors": [
+		{
+			"type": "Actor",
+			"name": "GoblinHut",
+			"persistent": true,
+			"active": true,
+			"transform": {
+				"position": [ 0, 0, 1 ],
+				"scale": [ 0.1, 0.1, 0.1 ],
+				"rotation": [ 0, 0, 0 ]
+			},
+			"components": [
+				{
+					"type": "ModelComponent",
+					"modelName": "fantasy/obj/SF_Bld_Goblin_Keep_01.obj",
+					"materialName": "fantasy/fantasy.mtrl",
+					"cullface": "back"
+				},
+				{
+					"type": "RotateComponent",
+					"Rotation": [ 0, 0, 0 ]
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "blocktree",
+			"persistent": true,
+			"active": true,
+			"transform": {
+				"position": [ 1, 0, 0 ],
+				"scale": [ 0.1, 0.1, 0.1 ],
+				"rotation": [ 0, 0, 0 ]
+			},
+			"components": [
+				{
+					"type": "ModelComponent",
+					"modelName": "fantasy/obj/SF_Bld_Elven_Castle_Wall_Tree_01.obj",
+					"materialName": "fantasy/fantasy.mtrl",
+					"cullface": "back"
+				},
+				{
+					"type": "RotateComponent",
+					"Rotation": [ 0, 0, 0 ]
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "ground",
+			"persistent": true,
+			"active": true,
+			"transform": {
+				"position": [ 1, 0, 1 ],
+				"scale": [ 1, 1, 1 ],
+				"rotation": [ 0, 0, 0 ]
+			},
+			"components": [
+				{
+					"type": "ModelComponent",
+					"modelName": "fantasy/obj/SF_Env_Tile_Dirt_01.obj",
+					"materialName": "fantasy/fantasy.mtrl",
+					"cullface": "back"
+				},
+				{
+					"type": "RotateComponent",
+					"Rotation": [ 0, 0, 0 ]
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "light",
+			"persistant": true,
+			"transform": {
+				"position": [ 3, 3, 3 ],
+				"rotation": [ 0, 0, 0 ]
+			},
+			"components": [
+				{
+					"type": "LightComponent",
+					"lightType": "point",
+					"color": [ 1, 1, 1 ],
+					"intensity": 1,
+					"range": 20,
+					"innerAngle": 10,
+					"outerAngle": 30
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "camera",
+			"persistant": true,
+			"transform": {
+				"position": [ 0, 0, 3 ],
+				"rotation": [ 0, 180, 0 ]
+			},
+			"components": [
+				{
+					"type": "CameraComponent",
+					"fov": 70.0,
+					"near": 0.1,
+					"far": 100.0
+				},
+				{
+					"type": "CameraController",
+					"speed": 5.0,
+					"sensitivity": 1
+				}
+			]
+		}
+	]
+}

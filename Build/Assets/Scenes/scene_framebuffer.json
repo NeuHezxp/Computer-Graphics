@@ -1,0 +1,83 @@
+{
+	"actors": [
+		{
+			"type": "Actor",
+			"name": "Ogre",
+			"persistent": true,
+			"active": true,
+			"transform": {
+				"position": [ 0, 0, 1 ],
+				"scale": [ 1, 1, 1 ],
+				"rotation": [ 0, 0, 0 ]
+			},
+			"components": [
+				{
+					"type": "ModelComponent",
+					"modelName": "models/ogre.obj",
+					"materialName": "Materials/ogre.mtrl",
+					"cullface": "back"
+				},
+				{
+					"type": "RotateComponent",
+					"Rotation": [ 0, 30, 0 ]
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "light",
+			"persistant": true,
+			"transform": {
+				"position": [ 3, 3, 3 ],
+				"rotation": [ 0, 0, 0 ]
+			},
+			"components": [
+				{
+					"type": "LightComponent",
+					"lightType": "point",
+					"color": [ 1, 1, 1 ],
+					"intensity": 1,
+					"range": 20,
+					"innerAngle": 10,
+					"outerAngle": 30
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "camera",
+			"persistant": true,
+			"transform": {
+				"position": [ 0, 0, 3 ],
+				"rotation": [ 0, 180, 0 ]
+			},
+			"components": [
+				{
+					"type": "CameraComponent",
+					"fov": 70.0,
+					"near": 0.1,
+					"far": 100.0
+				},
+				{
+					"type": "CameraController",
+					"speed": 5.0,
+					"sensitivity": 1
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "postprocess",
+			"persistent": true,
+			"active": true,
+			"prototype": false,
+			"components": [
+				{
+					"type": "ModelComponent",
+					"modelName": "models/quad.obj",
+					"materialName": "Materials/postprocess.mtrl"
+				}
+			]
+		}
+	]
+}
