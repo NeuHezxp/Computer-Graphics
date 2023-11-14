@@ -76,6 +76,7 @@ namespace nc
 
         // *** PASS 2 ***
         //m_scene->GetActorByName("postprocess")->active = true;
+       
 
         renderer.ResetViewport();
         renderer.BeginFrame();
