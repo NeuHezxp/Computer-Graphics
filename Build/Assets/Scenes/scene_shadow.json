@@ -71,7 +71,27 @@
 		},
 		{
 			"type": "Actor",
+			"name": "dethdebug",
+			"persistent": true,
+			"active": true,
+			"transform": {
+				"position": [ 0, 0, 0 ],
+				"scale": [ 1, 1, 1 ],
+				"rotation": [ 0, 0, 0 ]
+			},
+			"components": [
+				{
+					"type": "ModelComponent",
+					"modelName": "models/quad.obj",
+					"materialName": "materials/sprite.mtrl",
+					"cullface": "back"
+				}
+			]
+		},
+		{
+			"type": "Actor",
 			"name": "light",
+			"lightType" :  "directional",
 			"persistant": true,
 			"transform": {
 				"position": [ 3, 3, 3 ],
@@ -85,7 +105,8 @@
 					"intensity": 1,
 					"range": 20,
 					"innerAngle": 10,
-					"outerAngle": 30
+					"outerAngle": 30,
+          "castShadows": true
 				}
 			]
 		},

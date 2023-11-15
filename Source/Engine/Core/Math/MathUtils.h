@@ -54,4 +54,30 @@ namespace nc
 
 	// convert quaternion to euler angles (degrees)
 	glm::quat EulerToQuaternion(const glm::vec3& euler);
+
+	// Templated function to set bits
+	template<typename T>
+	constexpr T SetBits(T value, T mask) {
+		// The bitwise OR operation sets bits in 'value' that are set in 'mask'.
+		return value | mask;
+	}
+	// Templated function to clear bits
+	template<typename T>
+	constexpr T ClearBits(T value, T mask) {
+		// The bitwise AND operation with the negation of 'mask' clears bits in 'value' that are set in 'mask'.
+		return value & ~mask;
+	}
+	// Templated function to test bits
+	template<typename T>
+	constexpr bool TestBits(T value, T mask) {
+		// This checks if all bits set in 'mask' are also set in 'value'.
+		return (value & mask) == mask;
+	}
+	// Templated function to toggle bits
+	template<typename T>
+	constexpr T ToggleBits(T value, T mask) {
+		// The bitwise XOR operation toggles bits in 'value' that are set in 'mask'.
+		return value ^ mask;
+	}
+
 }

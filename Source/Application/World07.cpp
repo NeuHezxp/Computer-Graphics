@@ -11,16 +11,17 @@ namespace nc
         m_scene = std::make_unique<Scene>();
         m_scene->Load("Scenes/scene_shadow.json");
         m_scene->Initialize();
-
+        //create depth texture
         auto texture = std::make_shared<Texture>();
-        texture->CreateTexture(512, 512);
-        ADD_RESOURCE("fb_texture", texture);
-
+        texture->CreateDepthTexture(1024, 1024);
+        ADD_RESOURCE("depth_texture", texture);
+		//create debth buffer
         auto framebuffer = std::make_shared<Framebuffer>();
-        framebuffer->CreateFramebuffer(texture);
-        ADD_RESOURCE("fb", framebuffer);
+        framebuffer->CreateDepthBuffer(texture);
+        ADD_RESOURCE("depth_buffer", framebuffer);
 
-        auto material = GET_RESOURCE(Material, "Materials/postprocess.mtrl");
+        //set teaxture to debug sprite
+        auto material = GET_RESOURCE(Material, "Materials/sprite.mtrl");
         if (material)
         {
             material->albedoTexture = texture;
@@ -63,16 +64,34 @@ namespace nc
     void World07::Draw(Renderer& renderer)
     {
         // *** PASS 1 ***
-       /* m_scene->GetActorByName("postprocess")->active = false;
+      //  m_scene->GetActorByName("postprocess")->active = false;
 
-        auto framebuffer = GET_RESOURCE(Framebuffer, "fb");
+        auto framebuffer = GET_RESOURCE(Framebuffer, "depth_buffer");
         renderer.SetViewport(framebuffer->GetSize().x, framebuffer->GetSize().y);
         framebuffer->Bind();
 
-        renderer.BeginFrame({ 0, 0, 0 });
+		renderer.ClearDepth();
         m_scene->Draw(renderer);
+        auto program = GET_RESOURCE(Program, "shaders/shadow_depth.prog");
+        program->Use();
 
-        framebuffer->Unbind();*/
+        auto lights = m_scene->GetComponents<LightComponent>();
+		for (auto& light : lights)
+		{
+			if(light->castShadow)
+			{
+				glm::mat4 shadowMatrix = light->GetShadowMatrix();
+				program->SetUniform("shadowVP", shadowMatrix);
+			}
+		}
+		auto models = m_scene->GetComponents<ModelComponent>();
+        for(auto model : models)
+        {
+			program->SetUniform("model",model->m_owner->transform.GetMatrix());
+			model->model->Draw();
+        }
+
+        framebuffer->Unbind();
 
         // *** PASS 2 ***
         //m_scene->GetActorByName("postprocess")->active = true;

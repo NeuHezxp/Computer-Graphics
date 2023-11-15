@@ -39,13 +39,9 @@ namespace nc
 		// create texture (width, height)
 		glTexImage2D(m_target, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 
-
-
 		// set texture parameters
 		glTexParameteri(m_target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(m_target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-
 
 		return true;
 	}
@@ -57,17 +53,17 @@ namespace nc
 		m_target = GL_TEXTURE_2D;
 		m_size = glm::vec2{ width, height };
 
-
-
 		glGenTextures(1, &m_texture);
 		glBindTexture(m_target, m_texture);
 
-
-
 		// create texture (width, height)
-		glTexImage2D(m_target, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+		glTexImage2D(m_target, 0, GL_DEPTH_COMPONENT24, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 
-
+		// set texture parameters
+		glTexParameteri(m_target, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(m_target, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(m_target, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(m_target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 		return true;
 	}
