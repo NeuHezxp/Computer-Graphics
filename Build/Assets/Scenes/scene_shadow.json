@@ -95,7 +95,8 @@
 			"persistant": true,
 			"transform": {
 				"position": [ 3, 3, 3 ],
-				"rotation": [ 0, 0, 0 ]
+				"rotation": [ 0, 0, 0 ],
+				"castShadows": true
 			},
 			"components": [
 				{
@@ -105,8 +106,14 @@
 					"intensity": 1,
 					"range": 20,
 					"innerAngle": 10,
-					"outerAngle": 30,
-          "castShadows": true
+					"outerAngle": 30
+
+				},
+				{
+					"type": "ModelComponent",
+					"modelName": "models/quad.obj",
+					"materialName": "materials/ui_light.mtrl",
+          "scale": [ 0.5, 0.5, 0.5 ]
 				}
 			]
 		},

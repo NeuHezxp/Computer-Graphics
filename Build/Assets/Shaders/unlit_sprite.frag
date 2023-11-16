@@ -17,8 +17,6 @@ layout(binding = 0) uniform sampler2D tex;
 void main()
 {
     vec4 texcolor = texture(tex, ftexcoord);
-    
-
     if (texcolor.a < 0.5) discard;
-    ocolor = texcolor;
+    ocolor = texcolor * (material.albedo,1);
 }
