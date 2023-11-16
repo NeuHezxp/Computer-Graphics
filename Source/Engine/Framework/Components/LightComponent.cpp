@@ -27,14 +27,14 @@ namespace nc
 
 		if (castShadow)
 		{
-			glm::mat4 Bias = glm::mat4(
+			glm::mat4 bias = glm::mat4(
 				glm::vec4(0.5f, 0.0f, 0.0f, 0.0f),
 				glm::vec4(0.0f, 0.5f, 0.0f, 0.0f),
 				glm::vec4(0.0f, 0.0f, 0.5f, 0.0f),
 				glm::vec4(0.5f, 0.5f, 0.5f, 1.0f));
 
 
-			program->SetUniform("shadowVP",GetShadowMatrix() * Bias);
+			program->SetUniform("shadowVP", bias * GetShadowMatrix());
 			program->SetUniform("shadowBias",shadowBias);
 		}
 	}

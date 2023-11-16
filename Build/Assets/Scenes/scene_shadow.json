@@ -6,38 +6,15 @@
 			"persistent": true,
 			"active": true,
 			"transform": {
-				"position": [ 0, 0, 1 ],
-				"scale": [ 0.1, 0.1, 0.1 ],
+				"position": [ 0, 0.40, 0 ],
+				"scale": [ 1, 1, 1 ],
 				"rotation": [ 0, 0, 0 ]
 			},
 			"components": [
 				{
 					"type": "ModelComponent",
-					"modelName": "fantasy/obj/SF_Bld_Goblin_Keep_01.obj",
-					"materialName": "fantasy/fantasy.mtrl",
-					"cullface": "back"
-				},
-				{
-					"type": "RotateComponent",
-					"Rotation": [ 0, 0, 0 ]
-				}
-			]
-		},
-		{
-			"type": "Actor",
-			"name": "blocktree",
-			"persistent": true,
-			"active": true,
-			"transform": {
-				"position": [ 1, 0, 0 ],
-				"scale": [ 0.1, 0.1, 0.1 ],
-				"rotation": [ 0, 0, 0 ]
-			},
-			"components": [
-				{
-					"type": "ModelComponent",
-					"modelName": "fantasy/obj/SF_Bld_Elven_Castle_Wall_Tree_01.obj",
-					"materialName": "fantasy/fantasy.mtrl",
+					"modelName": "models/ogre.obj",
+					"materialName": "materials/ogre.mtrl",
 					"cullface": "back"
 				},
 				{
@@ -73,7 +50,7 @@
 			"type": "Actor",
 			"name": "dethdebug",
 			"persistent": true,
-			"active": true,
+			"active": false,
 			"transform": {
 				"position": [ 0, 0, 0 ],
 				"scale": [ 1, 1, 1 ],
@@ -94,8 +71,8 @@
 			"lightType" :  "directional",
 			"persistant": true,
 			"transform": {
-				"position": [ 3, 3, 3 ],
-				"rotation": [ 0, 0, 0 ],
+				"position": [ 0, 10, 0 ],
+				"rotation": [ 60, 30, 0 ],
 				"castShadows": true
 			},
 			"components": [
@@ -106,7 +83,8 @@
 					"intensity": 1,
 					"range": 20,
 					"innerAngle": 10,
-					"outerAngle": 30
+					"outerAngle": 30,
+					"castShadow":  true
 
 				},
 				{

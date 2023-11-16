@@ -63,7 +63,7 @@ float attenuation(in vec3 position1, in vec3 position2, in float range)
 
 float calculateShadow(vec4 shadowcoord,float bias)
 {
-return texture(shadowTexture,shadowcoord.xy ).r  < shadowcoord.z - shadowBias ? 0 : 1; // 0 = no shadow, 1 = shadow
+	return texture(shadowTexture, shadowcoord.xy ).r < shadowcoord.z - shadowBias ? 0 : 1; // 0 = no shadow, 1 = shadow
 }
  
 void phong(in Light light, in vec3 position, in vec3 normal, out vec3 diffuse, out vec3 specular)
@@ -100,7 +100,7 @@ void phong(in Light light, in vec3 position, in vec3 normal, out vec3 diffuse, o
 
 void main()
 {
-	vec4 albedoColor = bool(material.params & ALBEDO_TEXTURE_MASK) ? texture(albedoTexture, ftexcoord) : vec4(material.albedo, 1);
+	vec4 albedoColor   = bool(material.params & ALBEDO_TEXTURE_MASK)   ? texture(albedoTexture, ftexcoord)   : vec4(material.albedo, 1);
 	vec4 specularColor = bool(material.params & SPECULAR_TEXTURE_MASK) ? texture(specularTexture, ftexcoord) : vec4(material.specular, 1);
 	vec4 emissiveColor = bool(material.params & EMISSIVE_TEXTURE_MASK) ? texture(emissiveTexture, ftexcoord) : vec4(material.emissive, 1);
 
