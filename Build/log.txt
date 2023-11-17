@@ -5,7 +5,7 @@ INFO: Factory.h(74) Class registered: EnginePhysicsComponent
 INFO: Factory.h(74) Class registered: CameraController
 INFO: Factory.h(74) Class registered: CameraComponent
 INFO: Factory.h(74) Class registered: Actor
-INFO: Main.cpp(17) Initialize Engine...
+INFO: Main.cpp(18) Initialize Engine...
 WARNING: Program.cpp(165) Could not find uniform location: scanLine
 WARNING: Program.cpp(165) Could not find uniform location: view
 WARNING: Program.cpp(165) Could not find uniform location: projection

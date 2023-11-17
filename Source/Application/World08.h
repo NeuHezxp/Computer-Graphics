@@ -6,7 +6,7 @@
 
 namespace nc
 {
-	class World07 : public World
+	class World08 : public World
 	{
 	public:
 		const uint32_t INVERT_MASK		= (1 << 0);
@@ -31,6 +31,9 @@ namespace nc
 		float m_grainAmount{ 1 };
 		float m_scanlineIntensity{ 0.75f };
 		float m_rippleIntensity {20.0f};
+
+		//cel
+		int levels = 1;
 		
 
 		uint32_t m_params{ 0 };

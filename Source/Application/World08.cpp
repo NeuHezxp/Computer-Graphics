@@ -1,4 +1,4 @@
-#include "World07.h"
+#include "World08.h"
 #include "Framework/Framework.h"
 #include "Input/InputSystem.h"
 #include <glm/glm/gtc/type_ptr.hpp>
@@ -6,10 +6,10 @@
 
 namespace nc
 {
-    bool World07::Initialize()
+    bool World08::Initialize()
     {
         m_scene = std::make_unique<Scene>();
-        m_scene->Load("Scenes/scene_shadow.json");
+        m_scene->Load("Scenes/scene_cel_shading.json");
         m_scene->Initialize();
         //create depth texture
         auto texture = std::make_shared<Texture>();
@@ -35,17 +35,19 @@ namespace nc
         return true;
     }
 
-    void World07::Shutdown()
+    void World08::Shutdown()
     {
     }
 
-    void World07::Update(float dt)
+    void World08::Update(float dt)
     {
         m_time += dt;
         ENGINE.GetSystem<Gui>()->BeginFrame();
 
         m_scene->Update(dt);
         m_scene->ProcessGui();
+
+        ImGui::SliderInt("Cel Shading Levels", &levels, 1, 10);
 
 
         // set postprocess shader
@@ -63,10 +65,16 @@ namespace nc
 
         }
 
+        auto celShaderProgram = GET_RESOURCE(Program, "shaders/cel_shading.prog");
+        if (celShaderProgram) {
+            celShaderProgram->Use();
+            celShaderProgram->SetUniform("levels", levels);
+        }
+
         ENGINE.GetSystem<Gui>()->EndFrame();
     }
 
-    void World07::Draw(Renderer& renderer)
+    void World08::Draw(Renderer& renderer)
     {
         // *** PASS 1 ***
       //  m_scene->GetActorByName("postprocess")->active = false;
