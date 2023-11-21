@@ -3,6 +3,7 @@
 #include "Texture.h"
 #include "Cubemap.h"
 #include "Core/Core.h"
+#include <imgui/ImFileDialog.h>
 
 namespace nc
 {
@@ -27,35 +28,34 @@ namespace nc
 		std::string albedoTextureName;
 		if (READ_NAME_DATA(document, "albedoTexture", albedoTextureName))
 		{
-			params |= ALBEDO_TEXTURE_MASK;
 			albedoTexture = GET_RESOURCE(Texture, albedoTextureName);
 		}
 
 		std::string specularTextureName;
 		if (READ_NAME_DATA(document, "specularTexture", specularTextureName))
 		{
-			params |= SPECULAR_TEXTURE_MASK;
+			
 			specularTexture = GET_RESOURCE(Texture, specularTextureName);
 		}
 
 		std::string emissiveTextureName;
 		if (READ_NAME_DATA(document, "emissiveTexture", emissiveTextureName))
 		{
-			params |= EMISSIVE_TEXTURE_MASK;
+			
 			emissiveTexture = GET_RESOURCE(Texture, emissiveTextureName);
 		}
 
 		std::string normalTextureName;
 		if (READ_NAME_DATA(document, "normalTexture", normalTextureName))
 		{
-			params |= NORMAL_TEXTURE_MASK;
+			
 			normalTexture = GET_RESOURCE(Texture, normalTextureName);
 		}
 
 		std::string cubemapName;
 		if (READ_NAME_DATA(document, "cubemap", cubemapName))
 		{
-			params |= CUBEMAP_TEXTURE_MASK;
+			
 			std::vector<std::string> cubemaps;
 			READ_DATA(document, cubemaps);
 
@@ -87,26 +87,31 @@ namespace nc
 
 		if (albedoTexture)
 		{
+			params |= ALBEDO_TEXTURE_MASK;
 			albedoTexture->SetActive(GL_TEXTURE0);
 			albedoTexture->Bind();
 		}
 		if (specularTexture)
 		{
+			params |= SPECULAR_TEXTURE_MASK;
 			specularTexture->SetActive(GL_TEXTURE1);
 			specularTexture->Bind();
 		}
 		if (normalTexture)
 		{
+			params |= NORMAL_TEXTURE_MASK;
 			normalTexture->SetActive(GL_TEXTURE2);
 			normalTexture->Bind();
 		}
 		if (emissiveTexture)
 		{
+			params |= EMISSIVE_TEXTURE_MASK;
 			emissiveTexture->SetActive(GL_TEXTURE3);
 			emissiveTexture->Bind();
 		}
 		if (cubemapTexture)
 		{
+			params |= CUBEMAP_TEXTURE_MASK;
 			cubemapTexture->SetActive(GL_TEXTURE4);
 			cubemapTexture->Bind();
 		}
@@ -118,13 +123,43 @@ namespace nc
 	}
 	void Material::ProcessGui()
 	{
-		ImGui::Begin("Material");
-		ImGui::ColorEdit3("Albedo", glm::value_ptr(albedo));
-		ImGui::ColorEdit3("Specular", glm::value_ptr(specular));
+		/// shader
+		ImGui::Text("Shader:");
+		ImGui::SameLine();
+		ImGui::Text("%s", m_program->name.c_str());
+		Gui::GetDialogResource<Program>(m_program, "ShaderTextureDialog", "Open Shader", "Shader file (*.prog){.prog},.*");
+
+		/// albedo
+		ImGui::TextColored(ImVec4{ 0, 1, 0, 1 }, "Name: %s", name.c_str());
+		ImGui::Text("Albedo");
+		ImGui::SameLine();
+		ImGui::ColorEdit3("Albedo", glm::value_ptr(albedo), ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_NoInputs);
+		ImGui::SameLine();
+		(albedoTexture) ? ImGui::Text("%s", albedoTexture->name.c_str()) : ImGui::Text("None");
+		Gui::GetDialogResource<Texture>(albedoTexture, "AlbedoTextureDialog", "Open texture", "Image file (*.png;*.jpg;*.jpeg;*.bmp;*.tga){.png,.jpg,.jpeg,.bmp,.tga},.*");
+		
+		///Specular
+		ImGui::TextColored(ImVec4{ 0, 1, 0, 1 }, "Name: %s", name.c_str());
+		ImGui::Text("Specular  ");
+		ImGui::SameLine();
+		ImGui::ColorEdit3("Specular", glm::value_ptr(specular), ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_NoInputs);
+		ImGui::SameLine();
+		(specularTexture) ? ImGui::Text("%s", specularTexture->name.c_str()) : ImGui::Text("None");
+		Gui::GetDialogResource<Texture>(specularTexture, "SpecularTextureDialog", "Open texture", "Image file (*.png;*.jpg;*.jpeg;*.bmp;*.tga){.png,.jpg,.jpeg,.bmp,.tga},.*");
 		ImGui::DragFloat("Shininess", &shininess, 0.1f, 2.0f, 200.0f);
-		ImGui::ColorEdit3("Emissive", glm::value_ptr(emissive));
+
+		///Emissive
+		ImGui::TextColored(ImVec4{ 0, 1, 0, 1 }, "Name: %s", name.c_str());
+		ImGui::Text("Emissive  ");
+		ImGui::SameLine();
+		ImGui::ColorEdit3("Emissive", glm::value_ptr(emissive), ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_NoInputs);
+		ImGui::SameLine();
+		Gui::GetDialogResource<Texture>(emissiveTexture, "EmissiveTextureDialog", "Open texture", "Image file (*.png;*.jpg;*.jpeg;*.bmp;*.tga){.png,.jpg,.jpeg,.bmp,.tga},.*");
+		(emissiveTexture) ? ImGui::Text("%s", emissiveTexture->name.c_str()) : ImGui::Text("None");
+		///Normal
+		
+		///UV Mapping
 		ImGui::DragFloat2("Tiling", glm::value_ptr(tiling), 0.1f);
 		ImGui::DragFloat2("Offset", glm::value_ptr(offset), 0.1f);
-		ImGui::End();
 	}
 }

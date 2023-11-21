@@ -33,11 +33,12 @@ namespace nc
 		void ProcessGui();
 
 		friend class Actor;
-
+		friend class Editor;
 	public:
 		glm::vec3 ambientLight{ 0.2f };
 
 	private:
+		float m_dt{ 0 };
 		World* m_game = nullptr;
 		std::list<std::unique_ptr<Actor>> m_actors;
 	};

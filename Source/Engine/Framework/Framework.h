@@ -25,3 +25,5 @@
 
 #include "Engine.h"
 
+#include "Editor.h"
+

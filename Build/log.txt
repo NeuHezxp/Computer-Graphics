@@ -6,6 +6,10 @@ INFO: Factory.h(74) Class registered: CameraController
 INFO: Factory.h(74) Class registered: CameraComponent
 INFO: Factory.h(74) Class registered: Actor
 INFO: Main.cpp(18) Initialize Engine...
+INFO: Factory.h(82) Prototype Class registered: Camera
+INFO: Factory.h(82) Prototype Class registered: Light
+INFO: Factory.h(82) Prototype Class registered: Sphere
+INFO: Factory.h(82) Prototype Class registered: Cube
 WARNING: Program.cpp(165) Could not find uniform location: scanLine
 WARNING: Program.cpp(165) Could not find uniform location: view
 WARNING: Program.cpp(165) Could not find uniform location: projection

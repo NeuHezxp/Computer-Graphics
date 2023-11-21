@@ -9,10 +9,14 @@ namespace nc
     bool World08::Initialize()
     {
         m_scene = std::make_unique<Scene>();
+        m_scene->Load("Scenes/scene_editor.json");
         m_scene->Load("Scenes/scene_cel_shading.json");
         m_scene->Initialize();
+
+		m_editor = std::make_unique<Editor>(); // make unique it gets deleted if this world is deleted
+
         //create depth texture
-        auto texture = std::make_shared<Texture>();
+        auto texture = std::make_shared<Texture>(); //make shared it does not get deleted and is for multi-ownership
         texture->CreateDepthTexture(1024, 1024);
         ADD_RESOURCE("depth_texture", texture);
 		//create debth buffer
@@ -45,10 +49,11 @@ namespace nc
         ENGINE.GetSystem<Gui>()->BeginFrame();
 
         m_scene->Update(dt);
-        m_scene->ProcessGui();
-
+		m_editor->Update();
+        m_editor->ProcessGui(m_scene.get());
+        ImGui::Begin("cel");
         ImGui::SliderInt("Cel Shading Levels", &levels, 1, 10);
-
+        ImGui::End();
 
         // set postprocess shader
         auto program = GET_RESOURCE(Program, "shaders/postprocess.prog");
