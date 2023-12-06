@@ -2,11 +2,11 @@
   "program": "shaders/skybox.prog",
   "cubemap": "night_cubemap",
   "cubemaps": [
-    "textures/water_cubemap/posx.jpg",
-    "textures/water_cubemap/negx.jpg",
-    "textures/water_cubemap/posy.jpg",
-    "textures/water_cubemap/negy.jpg",
-    "textures/water_cubemap/posz.jpg",
-    "textures/water_cubemap/negz.jpg"
+    "textures/SanFrancisco4/posx.jpg",
+    "textures/SanFrancisco4/negx.jpg",
+    "textures/SanFrancisco4/posy.jpg",
+    "textures/SanFrancisco4/negy.jpg",
+    "textures/SanFrancisco4/posz.jpg",
+    "textures/SanFrancisco4/negz.jpg"
   ]
 }

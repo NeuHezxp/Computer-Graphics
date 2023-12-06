@@ -22,6 +22,7 @@ namespace nc
 		bool Load(const std::string& filename);
 		void Read(const json_t& value);
 
+
 		template<typename T>
 		T* GetActor();
 		template<typename T = Actor>
@@ -38,6 +39,7 @@ namespace nc
 		glm::vec3 ambientLight{ 0.2f };
 
 	private:
+		class Object* m_rename = nullptr;
 		float m_dt{ 0 };
 		World* m_game = nullptr;
 		std::list<std::unique_ptr<Actor>> m_actors;

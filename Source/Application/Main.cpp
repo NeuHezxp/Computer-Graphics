@@ -6,6 +6,7 @@
 #include "World06.h"
 #include "World07.h"
 #include "World08.h"
+#include "World09.h"
 #include "Core/Core.h"
 #include "Framework/Framework.h"
 #include "Renderer/Renderer.h"
@@ -23,7 +24,7 @@ int main(int argc, char* argv[])
 
 	ENGINE.Initialize();
 
-	auto world = make_unique<nc::World08>();
+	auto world = make_unique<nc::World09>();
 	world->Initialize();
 
 	// main loop

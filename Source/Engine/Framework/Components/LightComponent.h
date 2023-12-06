@@ -30,8 +30,8 @@ namespace nc
 		float innerAngle = 20;
 		float outerAngle = 30;
 		bool castShadow = false;
-		float shadowSize = 10;
-		float shadowBias = 0.005f;
+		float shadowSize = 60;
+		float shadowBias = 0.001f;
 
 	};
 }

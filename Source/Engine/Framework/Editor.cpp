@@ -10,21 +10,56 @@ namespace nc
 		
 	}
 
+
 	void Editor::ProcessGui(Scene* scene)
 	{
-
 		if (!m_active) return;
-		//show recoures
+
+		// Resource type filter dropdown
 		ImGui::Begin("resources");
+		const char* resourceTypes[] = { "Texture", "Model", "Material", "All" };
+		ImGui::Combo("Filter", reinterpret_cast<int*>(&m_currentResourceType), resourceTypes, IM_ARRAYSIZE(resourceTypes));
+
 		auto resources = GET_RESOURCES(Resource);
-		for (auto& resource : resources)
-		{
-			if(ImGui::Selectable(resource->name.c_str(),resource.get() == m_selected))
-			{
-				m_selected = resource.get();
+		for (auto& resource : resources) {
+			bool shouldDisplay = false;
+
+			switch (m_currentResourceType) {
+			case TYPE_TEXTURE:
+				shouldDisplay = std::dynamic_pointer_cast<Texture>(resource) != nullptr;
+				break;
+			case TYPE_MODEL:
+				shouldDisplay = std::dynamic_pointer_cast<Model>(resource) != nullptr;
+				break;
+			case TYPE_MATERIAL:
+				shouldDisplay = std::dynamic_pointer_cast<Material>(resource) != nullptr;
+				break;
+				// ... other cases
+			case ALL:
+			default:
+				shouldDisplay = true;
+				break;
+			}
+
+			if (shouldDisplay) {
+				if (ImGui::Selectable(resource->name.c_str(), resource.get() == m_selected)) {
+					m_selected = resource.get();
+				}
 			}
 		}
 		ImGui::End();
+		//if (!m_active) return;
+		////show recoures
+		//ImGui::Begin("resources");
+		//auto resources = GET_RESOURCES(Resource);
+		//for (auto& resource : resources)
+		//{
+		//	if(ImGui::Selectable(resource->name.c_str(),resource.get() == m_selected))
+		//	{	
+		//		m_selected = resource.get();
+		//	}
+		//}
+		//ImGui::End();
 
 		//show scene
 		ImGui::Begin("Scene");

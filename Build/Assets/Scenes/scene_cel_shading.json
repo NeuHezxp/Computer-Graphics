@@ -48,25 +48,6 @@
 		},
 		{
 			"type": "Actor",
-			"name": "dethdebug",
-			"persistent": true,
-			"active": false,
-			"transform": {
-				"position": [ 0, 0, 0 ],
-				"scale": [ 1, 1, 1 ],
-				"rotation": [ 0, 0, 0 ]
-			},
-			"components": [
-				{
-					"type": "ModelComponent",
-					"modelName": "models/quad.obj",
-					"materialName": "materials/sprite.mtrl",
-					"cullface": "back"
-				}
-			]
-		},
-		{
-			"type": "Actor",
 			"name": "light",
 			"lightType" :  "directional",
 			"persistant": true,

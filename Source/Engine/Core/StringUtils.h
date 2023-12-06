@@ -13,6 +13,8 @@ namespace nc
         static string ToLower(const string& input);                               // declares a static member function named ToLower that takes a const string input
         static bool IsEqualIgnoreCase(const string& str1, const string& str2);    // declares a static bool function named IsEqualIgnoreCase that takes a cont string str1
         static string CreateUnique(const string& input);                          // declares a static member function named CreateUnique that takes a const string input
+        static int GetTrailingNumber(const std::string& str);
+        static std::string RemoveTrailingNumber(const std::string& str);
 
     private:
         static unsigned int uniqueCounter; // creates a static int variable names uniqueCounter
